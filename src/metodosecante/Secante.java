@@ -8,10 +8,10 @@ public class Secante {
     String fxStr;
     int i = 2;
     double x0, x1, xi, fxi;
-    double errC = 0.0001;
+    double errC = 0.001;
     double err;
     Expr fx;
-    LinkedList<Valor> valores;
+    LinkedList<Valor> valores = new LinkedList<>();
     private DefaultTableModel modelo = new DefaultTableModel();
 
     public Secante(String fxStr, double x0, double x1) {
@@ -27,11 +27,11 @@ public class Secante {
             val.setX0("" + x0);
             val.setFx0("" + fx.value(x0));
             val.setX1("" + x1);
-            val.setFx0("" + fx.value(x0));
-            xi = x1 - ((x1 - x0)/(fx.value(x1)-fx.value(x0)))*fx.value(x1);
+            val.setFx1("" + fx.value(x1));
+            xi = x1 - (((x1 - x0)/(fx.value(x1)-fx.value(x0)))*fx.value(x1));
             val.setXi("" + xi);
-            val.setFxi("" + fx.value(xi));
-            err = Math.abs(fx.value(xi) - fx.value(x1));
+            val.setFxi("" + Math.round(fx.value(xi)*1000000.0)/1000000.0);
+            err = Math.abs(fx.value(xi));
             val.setMult("" + err);
             x0 = x1;
             x1 = xi;
@@ -43,15 +43,15 @@ public class Secante {
     public DefaultTableModel listar(JTable tabla) {
         modelo = (DefaultTableModel) tabla.getModel();
         modelo.setRowCount(0);
-        Object[] object = new Object[7];
+        Object[] object = new Object[8];
         for (int i = 0; i < valores.size(); i++) {
-            object[0] = valores.get(i).getX0();
-            object[1] = valores.get(i).getX1();
-            object[2] = valores.get(i).getFx0();
-            object[3] = valores.get(i).getFx1();
-            object[4] = valores.get(i).getXi();
-            object[5] = valores.get(i).getFxi();
-            object[6] = valores.get(i).getMult();
+            object[0] = i+2;
+            object[1] = valores.get(i).getX0();
+            object[2] = valores.get(i).getX1();
+            object[3] = valores.get(i).getFx0();
+            object[4] = valores.get(i).getFx1();
+            object[5] = valores.get(i).getXi();
+            object[6] = valores.get(i).getFxi();
             modelo.addRow(object);
         }
         return modelo;
