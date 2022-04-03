@@ -1,6 +1,12 @@
 package metodosecante;
 
-import java.util.HashSet;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -9,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*Alex, estas aqui
+ /*Alex, estas aqui
 package metodosecante;
 
 /**
@@ -21,14 +27,36 @@ public class HuD extends javax.swing.JFrame {
     /**
      * Creates new form HuD
      */
+
     public HuD() {
         initComponents();
+        ImageIcon calcular = new javax.swing.ImageIcon(getClass().getResource("/img/btnCalcular.png"));
+        btnCalc.setIcon(getFoto(calcular, btnCalc));
+        ImageIcon borrar = new javax.swing.ImageIcon(getClass().getResource("/img/btnBorrar.png"));
+        btnBorrar.setIcon(getFoto(borrar, btnBorrar));
+        ImageIcon info = new javax.swing.ImageIcon(getClass().getResource("/img/btnInfo.png"));
+        btnInfo.setIcon(getFoto(info, btnInfo));
+        
+        //CAMBIAMOS ESTILO A LA TABLA
+        jTable1.getTableHeader().setDefaultRenderer(new HeaderColor());
+        jTable1.getTableHeader().setForeground(new Color(255,255,255));
         this.setLocationRelativeTo(null);
+        this.setTitle("Metodo de la Secante");
+        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png")).getImage());
+    }
+
+    public Icon getFoto(ImageIcon imgI, JLabel lbl) {
+        int alto = lbl.getHeight();
+        Image img = imgI.getImage();
+        ImageIcon aux = new ImageIcon(img);
+        int altoOriginal = aux.getIconHeight();
+        int anchoOriginal = aux.getIconWidth();
+        ImageIcon img2 = new ImageIcon(img.getScaledInstance((anchoOriginal * alto) / altoOriginal, alto, Image.SCALE_SMOOTH));
+        return img2;
     }
 
     //x^3 + 2*x^2 + 10*x - 20
     //sin(x/2) - 5*exp(-x)
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,47 +66,31 @@ public class HuD extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Calcular = new javax.swing.JButton();
-        txtFuncion = new javax.swing.JTextField();
-        txtUno = new javax.swing.JTextField();
-        txtCero = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btnInfo = new javax.swing.JLabel();
+        btnBorrar = new javax.swing.JLabel();
+        btnCalc = new javax.swing.JLabel();
         Funcion = new javax.swing.JLabel();
-        Xuno = new javax.swing.JLabel();
         Xcero = new javax.swing.JLabel();
+        Xuno = new javax.swing.JLabel();
+        txtFuncion = new javax.swing.JTextField();
+        txtCero = new javax.swing.JTextField();
+        txtUno = new javax.swing.JTextField();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(67, 145, 155));
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Calcular.setText("Calcular");
-        Calcular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CalcularActionPerformed(evt);
-            }
-        });
-
-        txtFuncion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFuncionActionPerformed(evt);
-            }
-        });
-
-        txtUno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUnoActionPerformed(evt);
-            }
-        });
-
-        txtCero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCeroActionPerformed(evt);
-            }
-        });
-
+        jTable1.setBackground(new java.awt.Color(255, 255, 255));
+        jTable1.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null}
@@ -95,91 +107,96 @@ public class HuD extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setFocusable(false);
+        jTable1.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        jTable1.setRowHeight(30);
+        jTable1.setSelectionBackground(new java.awt.Color(232, 57, 95));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton2.setText("Borrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 196, 511, -1));
+
+        jPanel1.setBackground(new java.awt.Color(67, 145, 155));
+        jPanel1.setForeground(new java.awt.Color(67, 145, 155));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnInfoMousePressed(evt);
             }
         });
+        jPanel1.add(btnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 70, 40));
 
-        Funcion.setText("f(X)");
+        btnBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBorrarMousePressed(evt);
+            }
+        });
+        jPanel1.add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 110, 40));
 
-        Xuno.setText("X1");
+        btnCalc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnCalcMousePressed(evt);
+            }
+        });
+        jPanel1.add(btnCalc, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 110, 40));
 
-        Xcero.setText("X0");
+        Funcion.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        Funcion.setForeground(new java.awt.Color(255, 255, 255));
+        Funcion.setText("f(x):");
+        jPanel1.add(Funcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+
+        Xcero.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        Xcero.setForeground(new java.awt.Color(255, 255, 255));
+        Xcero.setText("X0:");
+        jPanel1.add(Xcero, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+
+        Xuno.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
+        Xuno.setForeground(new java.awt.Color(255, 255, 255));
+        Xuno.setText("X1:");
+        jPanel1.add(Xuno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+
+        txtFuncion.setBackground(new java.awt.Color(67, 145, 155));
+        txtFuncion.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        txtFuncion.setForeground(new java.awt.Color(255, 255, 255));
+        txtFuncion.setBorder(null);
+        txtFuncion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFuncionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtFuncion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 230, -1));
+
+        txtCero.setBackground(new java.awt.Color(67, 145, 155));
+        txtCero.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        txtCero.setForeground(new java.awt.Color(255, 255, 255));
+        txtCero.setBorder(null);
+        txtCero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCeroActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtCero, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 230, -1));
+
+        txtUno.setBackground(new java.awt.Color(67, 145, 155));
+        txtUno.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        txtUno.setForeground(new java.awt.Color(255, 255, 255));
+        txtUno.setBorder(null);
+        txtUno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUnoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtUno, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 230, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 240, -1));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 240, 20));
+        jPanel1.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 240, 20));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
-        jLabel1.setText("Metodo de la Secante");
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Método de la Secante");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, 40));
 
-        jButton3.setText("Ejemplo");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Xuno)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtUno, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel1)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(Funcion)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(txtFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(Xcero)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txtCero, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(126, 126, 126)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Calcular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Calcular)
-                    .addComponent(txtFuncion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Funcion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Xcero)
-                        .addComponent(txtCero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Xuno)
-                    .addComponent(txtUno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 640));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -189,41 +206,40 @@ public class HuD extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtUnoActionPerformed
 
-    private void CalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularActionPerformed
-        try{
-            String funcion = txtFuncion.getText();
-            double x0 = Double.parseDouble(txtCero.getText());
-            double x1 = Double.parseDouble(txtUno.getText());
-            Secante sec = new Secante(funcion, x0, x1);
-            sec.calcularValores();
-            jTable1.setModel(sec.listar(jTable1));
-        }catch(IllegalArgumentException e){
-            JOptionPane.showMessageDialog(null, "Ingrese bien los datos de forma correcta");
-        }
-    }//GEN-LAST:event_CalcularActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        txtFuncion.setText("");
-        txtCero.setText("");
-        txtUno.setText("");
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
-        modelo.setRowCount(0);
-        jTable1.setModel(modelo);
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void txtFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFuncionActionPerformed
         // TODO add your handling code here:
-          
+
     }//GEN-LAST:event_txtFuncionActionPerformed
 
     private void txtCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCeroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCeroActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnCalcMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalcMousePressed
+        try {
+            String funcion = txtFuncion.getText();
+            double x0 = Double.parseDouble(txtCero.getText());
+            double x1 = Double.parseDouble(txtUno.getText());
+            Secante sec = new Secante(funcion, x0, x1);
+            sec.calcularValores();
+            jTable1.setModel(sec.listar(jTable1));
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese bien los datos de forma correcta");
+        }
+    }//GEN-LAST:event_btnCalcMousePressed
+
+    private void btnBorrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarMousePressed
+        txtFuncion.setText("");
+        txtCero.setText("");
+        txtUno.setText("");
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+        jTable1.setModel(modelo);
+    }//GEN-LAST:event_btnBorrarMousePressed
+
+    private void btnInfoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInfoMousePressed
         JOptionPane.showMessageDialog(null, "Ejemplos de como ingresar funciones:\n- x^2 + x + 1\n- x^3 + 2*x^2 + 10*x - 20\n- exp(x^2) - 1\n- sin(2.3*x-7.1) - cos(7.1*x-2.3) ");
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnInfoMousePressed
 
     /**
      * @param args the command line arguments
@@ -261,14 +277,18 @@ public class HuD extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Calcular;
     private javax.swing.JLabel Funcion;
     private javax.swing.JLabel Xcero;
     private javax.swing.JLabel Xuno;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel btnBorrar;
+    private javax.swing.JLabel btnCalc;
+    private javax.swing.JLabel btnInfo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtCero;
     private javax.swing.JTextField txtFuncion;

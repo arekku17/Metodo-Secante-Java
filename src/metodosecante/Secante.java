@@ -24,18 +24,25 @@ public class Secante {
     public void calcularValores(){
         do{
             Valor val = new Valor();
-            val.setX0("" + x0);
-            val.setFx0("" + fx.value(x0));
-            val.setX1("" + x1);
-            val.setFx1("" + fx.value(x1));
+            //SALIDA
+            val.setX0("" + Math.round(x0*10000.0)/10000.0);
+            val.setFx0("" + Math.round(fx.value(x0)*10000.0)/10000.0);
+            val.setX1("" + Math.round(x1*10000.0)/10000.0);
+            val.setFx1("" + Math.round(fx.value(x1)*10000.0)/10000.0);
+            //OPERACION
             xi = x1 - (((x1 - x0)/(fx.value(x1)-fx.value(x0)))*fx.value(x1));
-            val.setXi("" + xi);
-            val.setFxi("" + Math.round(fx.value(xi)*1000000.0)/1000000.0);
-            err = Math.abs(fx.value(xi));
+            //SALIDA
+            val.setXi("" + Math.round(xi*10000.0)/10000.0);
+            val.setFxi("" + Math.round(fx.value(xi)*100000.0)/100000.0);
+            //OPERACION
+            err = Math.abs(fx.value(xi)); //VALOR REAL POSITIVO
             val.setMult("" + err);
+            //REEMPLAZAMOS NUEVOS VALORES
             x0 = x1;
             x1 = xi;
+            //AGREGAMOS LAS SALIDAS
             valores.add(val);
+            //AUMENTAMOS EL VALOR DE ITERACION
             i++;
         } while(err > errC);
     }
