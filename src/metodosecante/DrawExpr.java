@@ -5,6 +5,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import metodosecante.Expr;
 
+
+//CLASE PARA GRAFICAR
 public class DrawExpr extends JComponent {
     
     Expr funcion;

@@ -30,6 +30,7 @@ public class HuD extends javax.swing.JFrame {
 
     public HuD() {
         initComponents();
+        //CARGAMOS IMAGENES A LOS BOTONES
         ImageIcon calcular = new javax.swing.ImageIcon(getClass().getResource("/img/btnCalcular.png"));
         btnCalc.setIcon(getFoto(calcular, btnCalc));
         ImageIcon borrar = new javax.swing.ImageIcon(getClass().getResource("/img/btnBorrar.png"));
@@ -45,6 +46,7 @@ public class HuD extends javax.swing.JFrame {
         this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/img/logo.png")).getImage());
     }
 
+    //METODO PARA REDIMENSIONAR IMAGENES A LOS BOTONES
     public Icon getFoto(ImageIcon imgI, JLabel lbl) {
         int alto = lbl.getHeight();
         Image img = imgI.getImage();
@@ -208,7 +210,6 @@ public class HuD extends javax.swing.JFrame {
 
     private void txtFuncionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFuncionActionPerformed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_txtFuncionActionPerformed
 
     private void txtCeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCeroActionPerformed
@@ -217,18 +218,24 @@ public class HuD extends javax.swing.JFrame {
 
     private void btnCalcMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalcMousePressed
         try {
+            //OBTENEMOS EL VALOR DE LOS TEXT INPUT
             String funcion = txtFuncion.getText();
             double x0 = Double.parseDouble(txtCero.getText());
             double x1 = Double.parseDouble(txtUno.getText());
+            //GENERAMOS UN OBJETO DE LA CLASE SECANTE
             Secante sec = new Secante(funcion, x0, x1);
+            //CALCULAMOS LOS VALORES
             sec.calcularValores();
+            //MOSTRAMOS LOS VALORES EN LA TABLA
             jTable1.setModel(sec.listar(jTable1));
         } catch (IllegalArgumentException e) {
+            //ERROR
             JOptionPane.showMessageDialog(null, "Ingrese bien los datos de forma correcta");
         }
     }//GEN-LAST:event_btnCalcMousePressed
 
     private void btnBorrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBorrarMousePressed
+        //BORRAMOS TODO DEL JFRAME
         txtFuncion.setText("");
         txtCero.setText("");
         txtUno.setText("");
@@ -238,6 +245,7 @@ public class HuD extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBorrarMousePressed
 
     private void btnInfoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInfoMousePressed
+        //MOSTRAMOS UN MENSAJE DE EJEMPLO O AYUDA DE F(X)
         JOptionPane.showMessageDialog(null, "Ejemplos de como ingresar funciones:\n- x^2 + x + 1\n- x^3 + 2*x^2 + 10*x - 20\n- exp(x^2) - 1\n- sin(2.3*x-7.1) - cos(7.1*x-2.3) ");
     }//GEN-LAST:event_btnInfoMousePressed
 

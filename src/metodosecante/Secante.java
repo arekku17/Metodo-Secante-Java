@@ -5,6 +5,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class Secante {
+    //ATRIBUTOS
     String fxStr;
     int i = 2;
     double x0, x1, xi, fxi;
@@ -14,6 +15,7 @@ public class Secante {
     LinkedList<Valor> valores = new LinkedList<>();
     private DefaultTableModel modelo = new DefaultTableModel();
 
+    //CONSTRUCTOR
     public Secante(String fxStr, double x0, double x1) {
         this.fxStr = fxStr;
         this.x0 = x0;
@@ -21,6 +23,7 @@ public class Secante {
         fx = new Expr(fxStr);
     }
     
+    //METODO CON EL ALGORITMO DEL METODO SECANTE
     public void calcularValores(){
         do{
             Valor val = new Valor();
@@ -47,6 +50,7 @@ public class Secante {
         } while(err > errC);
     }
     
+    //METODO QUE NOS AYUDA A LISTAR LOS VALORES OBTENIDOS EN LA TABLA
     public DefaultTableModel listar(JTable tabla) {
         modelo = (DefaultTableModel) tabla.getModel();
         modelo.setRowCount(0);
@@ -62,6 +66,5 @@ public class Secante {
             modelo.addRow(object);
         }
         return modelo;
-//        frm.TablaDatos.setModel(modelo);
     }
 }
